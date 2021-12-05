@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.13",
+    "nodemon": "^2.0.15",
+    "pckg": "^0.1.1",
+    "react-scripts": "^4.0.3",
+    "express-validator": "^6.13.0"
+  },
+  "name": "test-admin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+   "server": "nodemon index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

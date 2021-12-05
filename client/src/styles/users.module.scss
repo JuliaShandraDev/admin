@@ -1,0 +1,14 @@
+.wrapper_users{
+    width: 100%;
+    height: auto;
+        .text{
+            width: 10%;
+            margin: 50px;
+        }
+    .users{
+        flex-wrap: wrap;
+        justify-content: center;
+        // align-self: flex-start;
+        // margin-left: 0; !!!!!!!!
+    }
+}

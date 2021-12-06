@@ -36,13 +36,13 @@
 
 //   return (
 //     <Modal open={open} onClose={() => setOpen(!open)}>
-<<<<<<< Updated upstream
+
 //       <div className={col centered ${styles.wrapper_modal}}>
 //         <div className={col centered ${styles.modal}}>
-=======
+
 //       <div className={`col centered ${styles.wrapper_modal}`}>
 //         <div className={`col centered ${styles.modal}`}>
->>>>>>> Stashed changes
+
 //           <TextField
 //             type="text"
 //             label="name"
@@ -63,11 +63,11 @@
 //               setFormData({ ...formData, email: e.target.value })
 //             }
 //           />
-<<<<<<< Updated upstream
+
 //           <div className={col ${styles.input}}>
-=======
+
 //           <div className={`col ${styles.input}`}>
->>>>>>> Stashed changes
+
 //             <FormLabel component="legend">user:</FormLabel>
 //             <div className="row sp_btw">
 //               <FormControlLabel

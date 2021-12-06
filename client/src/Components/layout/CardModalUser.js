@@ -29,8 +29,13 @@
 //   );
 
 //   return (
+
 //     <div className={row ${styles.wrapper_card}}>
 //       <div className={col ${styles.card}}>
+
+//     <div className={`row ${styles.wrapper_card}`}>
+//       <div className={`col ${styles.card}`}>
+
 //         <div className="col centered">
 //           <p>{profileDisplay.name}</p>
 //           <p>{profileDisplay.email}</p>
@@ -40,6 +45,10 @@
 //         <div className={row ${styles.card_button}}>
 //           <button
 //             className={row centered ${styles.button_left}}
+
+//         <div className={`row ${styles.card_button}`}>
+//           <button
+//             className={`row centered ${styles.button_left}`}
 //             onClick={() => {
 //               setClick(!click);
 //             }}
@@ -50,7 +59,11 @@
 //             </Icon>
 //           </button>
 //           <button
+
 //             className={row centered ${styles.button_right}}
+
+//             className={`row centered ${styles.button_right}`}
+
 //             onClick={() => deleteProfile(profileDisplay.name)}
 //           >
 //             Delete

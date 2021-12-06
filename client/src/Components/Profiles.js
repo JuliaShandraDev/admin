@@ -5,6 +5,7 @@ import { Icon } from "@mui/material";
 import { Navigate } from "react-router-dom";
 import CardEdit from "./layout/CardEdit.js";
 import ModalComponent from "./ModalComponent";
+import CardModalUser from "./layout/CardModalUser";
 
 const Profiles = () => {
   const dispatch = useDispatch();
@@ -30,12 +31,12 @@ const Profiles = () => {
 
   return (
     <div className={`${styles.wrapper_profiles}`}>
+      {/* <CardModalUser /> */}
       <h1 className={styles.text}>Profiles:</h1>
       <div className={`row ${styles.profiles}`}>
         {user?.profiles.map((user) => (
           <CardEdit profileDisplay={user} />
         ))}
-        {/* deleteProfile={deleteProfile} */}
         <div className={`col centered ${styles.card}`}>
           <button
             className={` ${styles.card_button}`}

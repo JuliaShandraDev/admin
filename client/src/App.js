@@ -1,43 +1,23 @@
 import "./App.scss";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 
-import {
-  BrowserRouter as Router,
-  Link,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Sing from "./Components/Sing";
 import Create from "./Components/Create";
 import Users from "./Components/Users";
 import Profiles from "./Components/Profiles";
-import CardEdit from "./Components/layout/CardEdit.js";
 import Dashboard from "./Components/Dashboard";
 import Header from "./Components/Header";
 
 function App() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  // const tab = useSelector((store) => store.tab);
 
   useEffect(() => {
     console.log(user);
   }, [user]);
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "LOGIN/REGISTER",
-  //     payload: localStorage.getItem("user")
-  //       ? JSON.parse(localStorage.getItem("user"))
-  //       : [],
-  //   });
-
-  //   useEffect(() => {
-  //     localStorage.setItem("user", JSON.stringify(user.user));
-  //   }, [user.user]);
 
   useEffect(() => {
     user &&

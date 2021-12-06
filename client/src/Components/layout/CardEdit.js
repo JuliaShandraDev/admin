@@ -1,5 +1,4 @@
 import { Icon } from "@mui/material";
-import { Model } from "mongoose";
 import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../../styles/layout/cardEdit.module.scss";
@@ -7,39 +6,8 @@ import ModalComponent from "../ModalComponent";
 
 const CardEdit = ({ profileDisplay }) => {
   const user = useSelector((store) => store.user);
-  const users = useSelector((store) => store.users);
   const dispatch = useDispatch();
   const [click, setClick] = useState(false);
-
-  // const createProfile = useCallback(() => {
-  //   fetch("/createProfile", {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(user),
-  //     method: "PATCH",
-  //   })
-  //     .then((user) => user.json())
-  //     .then((response) => {
-  //       console.log(response);
-  //       // dispatch({ type: "LOGIN/REGISTER", payload: response.updatedUser });
-  //     });
-  // }, []);
-
-  // const editProfile = useCallback(() => {
-  //   fetch("/editProfile", {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ email: user.email }),
-  //     method: "PATCH",
-  //   })
-  //     .then((user) => user.json())
-  //     .then((response) => {
-  //       console.log(response);
-  //       // dispatch({ type: "LOGIN/REGISTER", payload: response.updatedUser });
-  //     });
-  // }, [user]);
 
   const deleteProfile = useCallback(
     (name) => {
@@ -59,8 +27,6 @@ const CardEdit = ({ profileDisplay }) => {
     },
     [user]
   );
-
-  //  это сдесь нужно???
 
   return (
     <div className={`row ${styles.wrapper_card}`}>

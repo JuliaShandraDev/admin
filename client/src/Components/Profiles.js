@@ -10,23 +10,6 @@ const Profiles = () => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const [click, setClick] = useState(false);
-  const [formData, setFormData] = useState({});
-
-  // const deleteProfile = useCallback((user) => {
-  //   console.log("!9!", user);
-  //   fetch("/delete", {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(user),
-  //     method: "DELETE",
-  //   })
-  //     .then((users) => users.json())
-  //     .then((response) => {
-  //       console.log(response);
-  //       dispatch({ type: "INIT_USERS", payload: response.updateUser });
-  //     });
-  // }, []);
 
   const getUsers = useCallback(() => {
     fetch("/users", {
@@ -37,7 +20,6 @@ const Profiles = () => {
     })
       .then((allUsers) => allUsers.json())
       .then((response) => {
-        console.log(response.allUsers);
         dispatch({ type: "INIT_USERS", payload: response.allUsers });
       });
   }, []);
@@ -59,7 +41,6 @@ const Profiles = () => {
             className={` ${styles.card_button}`}
             onClick={() => {
               setClick(!click);
-              console.log(click);
             }}
           >
             <Icon fontSize="large">addcircle</Icon>

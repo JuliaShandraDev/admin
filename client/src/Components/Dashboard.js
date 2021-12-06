@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import CardEdit from "./layout/CardEdit.js";
+import { useSelector } from "react-redux";
 import styles from "../styles/dashboard.module.scss";
+import { Navigate } from "react-router-dom";
 
 const Dashboard = () => {
   const users = useSelector((store) => store.users);
+  const user = useSelector((store) => store.user);
 
   const countProfiles = useCallback(() => {
     return users.reduce((acc, user) => (acc += user.profiles.length), 0);
@@ -28,21 +29,25 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className={`${styles.wrapper_dashboard}`}>
+    <div className={styles.wrapper_dashboard}>
       <h1 className={styles.text}>Dashboard:</h1>
       {users && (
         <div className={`row ${styles.dashboard}`}>
-          <div className={styles.card}>
-            <p>Users: {users?.length}</p>
+          <div className={` col centered ${styles.card}`}>
+            <h2>Users:</h2>
+            <h1>{users?.length}</h1>
           </div>
-          <div className={styles.card}>
-            <p>Profiles: {users && countProfiles()}</p>
+          <div className={` col centered ${styles.card}`}>
+            <h2>Profiles:</h2>
+            <h1>{users && countProfiles()}</h1>
           </div>
-          <div className={styles.card}>
-            <p>Over 18: {users && countAdultUsers()}</p>
+          <div className={` col centered ${styles.card}`}>
+            <h2>Profiles over 18 years old:</h2>
+            <h1>{users && countAdultUsers()}</h1>
           </div>
         </div>
       )}
+      {!user && <Navigate to="/login" />}
     </div>
   );
 };

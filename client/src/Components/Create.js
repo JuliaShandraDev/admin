@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { TextField } from "@mui/material";
 import styles from "../styles/create.module.scss";
-import { Switch, Route, Navigate, Link } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const Create = () => {
@@ -21,14 +21,11 @@ const Create = () => {
     })
       .then((user) => user.json())
       .then((user) => {
-        console.log(user);
         dispatch({ type: "LOGIN/REGISTER", payload: user.createdUser });
       });
   }, [formData]);
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  useEffect(() => {}, [formData]);
 
   return (
     <div className={`col centered ${styles.create}`}>

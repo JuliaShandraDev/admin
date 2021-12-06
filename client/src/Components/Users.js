@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import CardUsers from "./layout/CardUsers";
 import styles from "../styles/users.module.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const Users = () => {
   const users = useSelector((store) => store.users);
-  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
 
   return (
     <div className={`${styles.wrapper_users}`}>
@@ -15,6 +16,7 @@ const Users = () => {
           <CardUsers userToDisplay={user} />
         ))}
       </div>
+      {!user && <Navigate to="/login" />}
     </div>
   );
 };

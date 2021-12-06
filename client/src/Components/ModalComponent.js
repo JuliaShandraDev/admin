@@ -2,11 +2,9 @@ import React, { useState, useCallback } from "react";
 import {
   TextField,
   Icon,
-  Buttton,
   Radio,
   FormControlLabel,
   Modal,
-  FormControl,
   FormLabel,
 } from "@mui/material";
 import styles from "../styles/modalComponent.module.scss";
@@ -15,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 const ModalComponent = ({ open, setOpen, profile }) => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  // const [click, setClick] = useState(false);
   const [formData, setFormData] = useState(profile ? profile : {});
   const [check, setCheck] = useState();
 
@@ -29,7 +26,6 @@ const ModalComponent = ({ open, setOpen, profile }) => {
     })
       .then((user) => user.json())
       .then((response) => {
-        console.log(response);
         dispatch({ type: "LOGIN/REGISTER", payload: response.updatedUser });
       });
   }, [user, formData]);
@@ -48,7 +44,6 @@ const ModalComponent = ({ open, setOpen, profile }) => {
     })
       .then((user) => user.json())
       .then((response) => {
-        console.log(response);
         dispatch({ type: "LOGIN/REGISTER", payload: response.updatedUser });
       });
   }, [user, formData, profile]);

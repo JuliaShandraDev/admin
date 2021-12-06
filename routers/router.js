@@ -1,26 +1,8 @@
 //маршруты/routes
 const { Router } = require("express");
-const Admin = require("../models/Admin");
 const router = Router();
 
 const User = require("../models/User");
-
-// [
-//   // check("username", "Имя пользователя не может быть пустым").notEmpty(),
-//   // check("password", "Пароль должен быть больше 4 и меньше 18 символов").isLength({min:4, max:10})
-// ],
-
-// вызвать юзера/ call/find user
-//const createdUser = await User.findOne({ email }).lean().exec();
-
-// // callfind all users
-// User.find({}).lean().exec();
-
-//запросы/ requets
-
-// requets/response - запрос.отзыв
-
-// какие поля к телу???
 
 // create
 router.post("/registration", async (req, res) => {
@@ -41,7 +23,6 @@ router.post("/registration", async (req, res) => {
 });
 
 // router requets login
-//isAdmin add?
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -57,12 +38,11 @@ router.post("/login", async (req, res) => {
 
 router.get("/users", async (req, res) => {
   const allUsers = await User.find().lean().exec();
-  console.log(allUsers);
 
   allUsers ? res.json({ allUsers }) : res.json({ err: "Server disconected " });
 });
 
-//create
+//router requets create
 
 router.patch("/createProfile", async (req, res) => {
   const { user, profile } = req.body;
@@ -85,6 +65,8 @@ router.patch("/createProfile", async (req, res) => {
     ? res.json({ updatedUser })
     : res.json({ err: "Credentials is wrong" });
 });
+
+// router requets edit profils
 
 router.patch("/editProfile", async (req, res) => {
   const { email, profile, oldName } = req.body;
@@ -140,11 +122,10 @@ router.delete("/deleteProfile", async (req, res) => {
     : res.json({ err: "Credentials is wrong" });
 });
 
-// router requets edite profils
+// router requets edit user(profile)
 
 router.patch("/editUser", async (req, res) => {
   const { user, profile } = req.body;
-  console.log(req.body);
 
   const userBefore = await User.findOne({ email: user.email }).lean().exec();
 
@@ -170,7 +151,5 @@ router.patch("/editUser", async (req, res) => {
     ? res.json({ updatedUser })
     : res.json({ err: "Credentials is wrong" });
 });
-
-// router requets create profils
 
 module.exports = router;

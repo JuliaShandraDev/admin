@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { TextField } from "@mui/material";
 import styles from "../styles/sing.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { Switch, Route, Navigate, Link } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 
 const Sing = () => {
   const user = useSelector((store) => store.user);
@@ -20,14 +20,11 @@ const Sing = () => {
     })
       .then((user) => user.json())
       .then((user) => {
-        console.log(user);
         dispatch({ type: "LOGIN/REGISTER", payload: user.createdUser });
       });
   }, [formData]);
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  useEffect(() => {}, [formData]);
 
   return (
     <div className={`col centered ${styles.sing}`}>
@@ -62,6 +59,14 @@ const Sing = () => {
       >
         Sing in
       </button>
+
+      <div className={`${styles.footer}`}>
+        <span>If you don`t have an account</span>
+        <Link className={styles.link} to="/">
+          Sing up
+        </Link>
+      </div>
+
       {user && <Navigate to="/profiles" />}
     </div>
   );

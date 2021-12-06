@@ -1,12 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button } from "@mui/material";
-import {
-  BrowserRouter as Router,
-  Link,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../styles/header.module.scss";
 

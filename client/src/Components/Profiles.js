@@ -5,7 +5,6 @@ import { Icon } from "@mui/material";
 import { Navigate } from "react-router-dom";
 import CardEdit from "./layout/CardEdit.js";
 import ModalComponent from "./ModalComponent";
-import CardModalUser from "./layout/CardModalUser";
 
 const Profiles = () => {
   const dispatch = useDispatch();

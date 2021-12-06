@@ -18,4 +18,12 @@
                 }
             }
         }
+        @media (max-width: 1000px) {
+            .user_role{
+                width: 15%;
+            }
+            .links{
+                width: 60%;
+            }
+        }
 }

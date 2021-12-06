@@ -1,32 +1,14 @@
 import { Icon } from "@mui/material";
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../../styles/layout/cardEdit.module.scss";
 import ModalComponent from "../ModalComponent";
+import { deleteProfile } from "../../thunks";
 
 const CardEdit = ({ profileDisplay }) => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [click, setClick] = useState(false);
-
-  const deleteProfile = useCallback(
-    (name) => {
-      console.log("!9!", user);
-      fetch("/deleteProfile", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: user.email, name }),
-        method: "DELETE",
-      })
-        .then((users) => users.json())
-        .then((response) => {
-          console.log(response);
-          dispatch({ type: "LOGIN/REGISTER", payload: response.updatedUser });
-        });
-    },
-    [user]
-  );
 
   return (
     <div className={`row ${styles.wrapper_card}`}>
@@ -52,7 +34,7 @@ const CardEdit = ({ profileDisplay }) => {
           </button>
           <button
             className={`row centered ${styles.button_right}`}
-            onClick={() => deleteProfile(profileDisplay.name)}
+            onClick={() => dispatch(deleteProfile(user, profileDisplay.name))}
           >
             Delete
             <Icon style={{ margin: "5px" }} fontSize="small">

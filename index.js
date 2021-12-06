@@ -7,7 +7,6 @@ const PORT = 5000;
 
 const app = express();
 
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 
 app.use("/", router);

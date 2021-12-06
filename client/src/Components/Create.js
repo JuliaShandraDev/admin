@@ -1,8 +1,9 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField } from "@mui/material";
 import styles from "../styles/create.module.scss";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { register } from "../thunks";
 
 const Create = () => {
   const user = useSelector((store) => store.user);
@@ -10,20 +11,6 @@ const Create = () => {
 
   const [click, setClick] = useState(false);
   const [formData, setFormData] = useState({ isAdmin: false });
-
-  const register = useCallback(() => {
-    fetch("/registration", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-      method: "POST",
-    })
-      .then((user) => user.json())
-      .then((user) => {
-        dispatch({ type: "LOGIN/REGISTER", payload: user.createdUser });
-      });
-  }, [formData]);
 
   useEffect(() => {}, [formData]);
 
@@ -75,11 +62,7 @@ const Create = () => {
           <p>is admin</p>
         </div>
 
-        <button
-          onClick={() => {
-            register();
-          }}
-        >
+        <button onClick={() => dispatch(register(user, formData))}>
           Sing up
         </button>
 

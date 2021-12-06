@@ -1,28 +1,15 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField } from "@mui/material";
 import styles from "../styles/sing.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Link } from "react-router-dom";
+import { registLogin } from "../thunks";
 
 const Sing = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({});
-
-  const register = useCallback(() => {
-    fetch("/login", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-      method: "POST",
-    })
-      .then((user) => user.json())
-      .then((user) => {
-        dispatch({ type: "LOGIN/REGISTER", payload: user.createdUser });
-      });
-  }, [formData]);
 
   useEffect(() => {}, [formData]);
 
@@ -52,13 +39,7 @@ const Sing = () => {
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
       />
 
-      <button
-        onClick={() => {
-          register();
-        }}
-      >
-        Sing in
-      </button>
+      <button onClick={() => dispatch(registLogin(formData))}>Sing in</button>
 
       <div className={`${styles.footer}`}>
         <span>If you don`t have an account</span>

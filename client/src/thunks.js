@@ -1,75 +1,88 @@
-// export const register = (user) => {
-//   return async (dispatch) => {
-//     fetch("/registration", {
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(user),
-//       method: "POST",
-//     })
-//       .then((user) => user.json())
-//       .then((user) => {
-//         console.log(user);
-//         dispatch({ type: "LOGIN/REGISTER", payload: user.createdUser });
-//       });
-//   };
-// };
-// // и на синг такой же фетч?
+export const register = (user, formData) => {
+  return async (dispatch) => {
+    const create = await fetch("/registration", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+      method: "POST",
+    });
+    const json = await create.json();
+    dispatch({ type: "LOGIN/REGISTER", payload: json.createdUser });
+  };
+};
 
-// // user ??? instend of fromData
+export const registLogin = (formData) => {
+  return async (dispatch) => {
+    const login = await fetch("/login", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+      method: "POST",
+    });
+    const json = await login.json();
+    dispatch({ type: "LOGIN/REGISTER", payload: json.createdUser });
+  };
+};
 
-// export const getUsers = () => {
-//   return (dispatch) => {
-//     fetch("/users", {
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       method: "GET",
-//     })
-//       .then((allUsers) => allUsers.json())
-//       .then((response) => {
-//         console.log(response.allUsers);
-//         dispatch({ type: "INITUSERS", payload: response.allUsers });
-//       });
-//   };
-// };
+export const getUsers = () => {
+  return async (dispatch) => {
+    const usersAll = await fetch("/users", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "GET",
+    });
+    const json = await usersAll.json();
+    dispatch({ type: "INIT_USERS", payload: json.allUsers });
+  };
+};
 
-// export const deleteUsers = () => {
-//   return (dispatch) => {
-//     fetch("/delete", {
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       method: "DELETE",
-//     })
-//       .then((oneUsers) => oneUsers.json())
-//       .then((response) => {
-//         console.log(response.oneUsers);
-//         dispatch({ type: "DELETEUSER", payload: response.oneUsers });
-//       });
-//   };
-// };
+export const deleteProfile = (user, name) => {
+  return async (dispatch) => {
+    const profile = await fetch("/deleteProfile", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: user.email, name }),
+      method: "DELETE",
+    });
+    const json = await profile.json();
+    dispatch({ type: "LOGIN/REGISTER", payload: json.updatedUser });
+  };
+};
 
-// export const createLogin = (user) => {
-//   return (dispatch) => {
-//     dispatch({ type: "LOGIN/REGISTER", payload: user });
-//   };
-// };
+export const editProfile = (user, formData, profile) => {
+  return async (dispatch) => {
+    const edit = await fetch("/editProfile", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        profile: formData,
+        oldName: profile.name,
+      }),
+      method: "PATCH",
+    });
 
-// export const exit = () => {
-//   return (dispatch) => {
-//     dispatch({ type: "LOGIN/REGISTER" });
-//   };
-// };
+    const json = await edit.json();
+    console.log(json);
+    dispatch({ type: "LOGIN/REGISTER", payload: json.updatedUser });
+  };
+};
 
-// export const addUser = (users) => {
-//   return (dispatch) => {
-//     dispatch({ type: "INITUSERS", payload: users });
-//   };
-// };
-
-// export const deleteUser = () => {
-//   return (dispatch) => {
-//     dispatch({ type: "DELETEUSER" });
-//   };
-// };
+export const createProfile = (user, formData) => {
+  return async (dispatch) => {
+    const create = await fetch("/editUser", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user, profile: formData }),
+      method: "PATCH",
+    });
+    const json = await create.json();
+    dispatch({ type: "LOGIN/REGISTER", payload: json.updatedUser });
+  };
+};

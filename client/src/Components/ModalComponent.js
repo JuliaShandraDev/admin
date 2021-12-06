@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import {
   TextField,
   Icon,
@@ -9,44 +9,13 @@ import {
 } from "@mui/material";
 import styles from "../styles/modalComponent.module.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { createProfile, editProfile } from "../thunks";
 
 const ModalComponent = ({ open, setOpen, profile }) => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(profile ? profile : {});
   const [check, setCheck] = useState();
-
-  const createProfile = useCallback(() => {
-    fetch("/editUser", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user, profile: formData }),
-      method: "PATCH",
-    })
-      .then((user) => user.json())
-      .then((response) => {
-        dispatch({ type: "LOGIN/REGISTER", payload: response.updatedUser });
-      });
-  }, [user, formData]);
-
-  const editProfile = useCallback(() => {
-    fetch("/editProfile", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: user.email,
-        profile: formData,
-        oldName: profile.name,
-      }),
-      method: "PATCH",
-    })
-      .then((user) => user.json())
-      .then((response) => {
-        dispatch({ type: "LOGIN/REGISTER", payload: response.updatedUser });
-      });
-  }, [user, formData, profile]);
 
   return (
     <Modal open={open} onClose={() => setOpen(!open)}>
@@ -117,7 +86,9 @@ const ModalComponent = ({ open, setOpen, profile }) => {
             <button
               className={styles.button}
               onClick={() => {
-                profile ? editProfile() : createProfile();
+                profile
+                  ? dispatch(editProfile(user, formData, profile))
+                  : dispatch(createProfile(user, formData));
                 setOpen(false);
               }}
             >

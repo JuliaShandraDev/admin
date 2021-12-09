@@ -1,3 +1,6 @@
+global.TextEncoder = require("util").TextEncoder;
+global.TextDecoder = require("util").TextDecoder;
+
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -7,18 +10,24 @@ const PORT = 5000;
 
 const app = express();
 
-app.use(express.json({ extended: true }));
-
+app.use(express.json({ extended: false }));
+app.get("/test", (req, res) => res.status(200).send("OK"));
 app.use("/", router);
-
 const start = async () => {
   try {
     await mongoose.connect(
       `mongodb+srv://JuliaShandraDev:ITop1000ShaJul@cluster.u9grn.mongodb.net/test?retryWrites=true&w=majority`
     );
-    app.listen(PORT, () => console.log(`server startedd on port ${PORT}`));
+    if (process.env.NODE_ENV !== "test") {
+      app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
+    }
   } catch (e) {
     console.log(e);
   }
 };
 start();
+
+module.exports = { app };
+// if (process.env.NODE_ENV !== "test") {
+//   app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
+// }

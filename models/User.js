@@ -1,3 +1,6 @@
+global.TextEncoder = require("util").TextEncoder;
+global.TextDecoder = require("util").TextDecoder;
+
 const { model, Schema } = require("mongoose");
 
 const User = new Schema({

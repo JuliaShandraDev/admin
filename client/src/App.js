@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import Sing from "./Components/Sing";
+import SingIn from "./Components/SingIn";
 import Create from "./Components/Create";
 import Users from "./Components/Users";
 import Profiles from "./Components/Profiles";
@@ -15,9 +15,7 @@ function App() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   useEffect(() => {
     user &&
@@ -46,7 +44,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Create />}></Route>
 
-          <Route path="/login" element={<Sing />}></Route>
+          <Route path="/login" element={<SingIn />}></Route>
 
           <Route path="/profiles" element={<Profiles />}></Route>
 

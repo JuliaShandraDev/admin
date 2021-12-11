@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "../styles/profiles.module.scss";
 import { Icon } from "@mui/material";
 import { Navigate } from "react-router-dom";
-import CardEdit from "./layout/CardEdit.js";
+import CardEdit from "./Cards/CardEdit.js";
 import ModalComponent from "./ModalComponent";
 import { getUsers } from "../thunks";
 

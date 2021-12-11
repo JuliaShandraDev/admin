@@ -24,10 +24,6 @@ const Dashboard = () => {
     );
   }, [users]);
 
-  useEffect(() => {
-    console.log(countAdultUsers());
-  }, []);
-
   return (
     <div className={styles.wrapper_dashboard}>
       <h1 className={styles.text}>Dashboard:</h1>

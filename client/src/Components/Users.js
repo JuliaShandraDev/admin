@@ -1,5 +1,5 @@
 import React from "react";
-import CardUsers from "./layout/CardUsers";
+import CardUsers from "./Cards/CardUsers";
 import styles from "../styles/users.module.scss";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";

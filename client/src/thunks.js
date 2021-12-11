@@ -68,7 +68,6 @@ export const editProfile = (user, formData, profile) => {
     });
 
     const json = await edit.json();
-    console.log(json);
     dispatch({ type: "LOGIN/REGISTER", payload: json.updatedUser });
   };
 };

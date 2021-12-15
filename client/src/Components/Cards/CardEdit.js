@@ -2,16 +2,16 @@ import { Icon } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../../styles/Cards/cardEdit.module.scss";
-import ModalComponent from "../ModalComponent";
+import ModalComponent from "../Shared/ModalComponent";
 import { deleteProfile } from "../../thunks";
 
 const CardEdit = ({ profileDisplay }) => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const [click, setClick] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   return (
-    <div className={`row ${styles.wrapper_card}`}>
+    <div className={`row ${styles.wrapperCard}`}>
       <div className={`col ${styles.card}`}>
         <div className="col centered">
           <p>{profileDisplay.name}</p>
@@ -20,12 +20,10 @@ const CardEdit = ({ profileDisplay }) => {
           <p>{profileDisplay.city}</p>
         </div>
 
-        <div className={`row ${styles.card_button}`}>
+        <div className={`row ${styles.cardButton}`}>
           <button
-            className={`row centered ${styles.button_left}`}
-            onClick={() => {
-              setClick(!click);
-            }}
+            className={`row centered ${styles.buttonLeft}`}
+            onClick={() => setToggle(!toggle)}
           >
             Edit
             <Icon style={{ margin: "5px" }} fontSize="small">
@@ -33,7 +31,7 @@ const CardEdit = ({ profileDisplay }) => {
             </Icon>
           </button>
           <button
-            className={`row centered ${styles.button_right}`}
+            className={`row centered ${styles.buttonRight}`}
             onClick={() => dispatch(deleteProfile(user, profileDisplay.name))}
           >
             Delete
@@ -43,10 +41,10 @@ const CardEdit = ({ profileDisplay }) => {
           </button>
         </div>
       </div>
-      {click && (
+      {toggle && (
         <ModalComponent
-          open={click}
-          setOpen={setClick}
+          open={toggle}
+          setOpen={setToggle}
           profile={profileDisplay}
         />
       )}

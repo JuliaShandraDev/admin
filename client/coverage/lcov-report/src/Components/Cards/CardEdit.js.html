@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">12.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/8</span>
+                <span class='fraction'>1/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/7</span>
+                <span class='fraction'>1/7</span>
             </div>
         
             
@@ -118,17 +118,15 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,9 +143,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -181,16 +177,16 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../../styles/Cards/cardEdit.module.scss";
-import ModalComponent from "../ModalComponent";
+import ModalComponent from "../Shared/ModalComponent";
 import { deleteProfile } from "../../thunks";
 &nbsp;
-const CardEdit = ({ profileDisplay }) =&gt; {
-  const user = useSelector(<span class="fstat-no" title="function not covered" >(s</span>tore) =&gt; <span class="cstat-no" title="statement not covered" >store.user)</span>;
+const CardEdit = <span class="fstat-no" title="function not covered" >({</span> profileDisplay }) =&gt; {
+  const user = <span class="cstat-no" title="statement not covered" >useSelector(<span class="fstat-no" title="function not covered" >(s</span>tore) =&gt; <span class="cstat-no" title="statement not covered" >store.user)</span>;</span>
   const dispatch = <span class="cstat-no" title="statement not covered" >useDispatch();</span>
-  const [click, setClick] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
+  const [toggle, setToggle] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className={`row ${styles.wrapper_card}`}&gt;
+    &lt;div className={`row ${styles.wrapperCard}`}&gt;
       &lt;div className={`col ${styles.card}`}&gt;
         &lt;div className="col centered"&gt;
           &lt;p&gt;{profileDisplay.name}&lt;/p&gt;
@@ -199,12 +195,10 @@ const CardEdit = ({ profileDisplay }) =&gt; {
           &lt;p&gt;{profileDisplay.city}&lt;/p&gt;
         &lt;/div&gt;
 &nbsp;
-        &lt;div className={`row ${styles.card_button}`}&gt;
+        &lt;div className={`row ${styles.cardButton}`}&gt;
           &lt;button
-            className={`row centered ${styles.button_left}`}
-            onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >              setClick(!click);</span>
-            }}
+            className={`row centered ${styles.buttonLeft}`}
+            onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setToggle(!toggle)}</span>
           &gt;
             Edit
             &lt;Icon style={{ margin: "5px" }} fontSize="small"&gt;
@@ -212,7 +206,7 @@ const CardEdit = ({ profileDisplay }) =&gt; {
             &lt;/Icon&gt;
           &lt;/button&gt;
           &lt;button
-            className={`row centered ${styles.button_right}`}
+            className={`row centered ${styles.buttonRight}`}
             onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >dispatch(deleteProfile(user, profileDisplay.name))}</span>
           &gt;
             Delete
@@ -222,10 +216,10 @@ const CardEdit = ({ profileDisplay }) =&gt; {
           &lt;/button&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-      {click &amp;&amp; (
+      {toggle &amp;&amp; (
         &lt;ModalComponent
-          open={click}
-          setOpen={setClick}
+          open={toggle}
+          setOpen={setToggle}
           profile={profileDisplay}
         /&gt;
       )}
@@ -241,7 +235,7 @@ export default CardEdit;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Dec 10 2021 17:57:50 GMT+0200 (за східноєвропейським стандартним часом)
+                at Wed Dec 15 2021 17:30:36 GMT+0200 (за східноєвропейським стандартним часом)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

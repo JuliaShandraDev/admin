@@ -16,7 +16,7 @@ router.post("/registration", async (req, res) => {
 
   await user.save();
 
-  const createdUser = await User.findOne({ name }).lean().exec();
+  const createdUser = await User.findOne({ email }).lean().exec();
 
   res.status(200).json({ createdUser });
 });
@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
 
   createdUser && createdUser.password === password
     ? res.status(200).json({ createdUser })
-    : res.status(200).json({ err: "Credentials is wrong " });
+    : res.json({ err: "Credentials is wrong " });
 });
 
 router.get("/users", async (req, res) => {
@@ -36,13 +36,17 @@ router.get("/users", async (req, res) => {
 
   allUsers
     ? res.status(200).json({ allUsers })
-    : res.status(200).json({ err: "Server disconected " });
+    : res.json({ err: "Server disconected " });
 });
 
 router.patch("/createProfile", async (req, res) => {
   const { user, profile } = req.body;
+
+  const userBefore = await User.findOne({ email: user.email }).lean().exec();
+  console.log(userBefore);
+
   await User.updateOne(
-    { email },
+    { email: user.email },
     {
       $set: {
         profiles: [...userBefore.profiles, profile],
@@ -55,7 +59,7 @@ router.patch("/createProfile", async (req, res) => {
   const updatedUser = await User.findOne({ email: user.email }).lean().exec();
   updatedUser
     ? res.status(200).json({ updatedUser })
-    : res.status(200).json({ err: "Credentials is wrong" });
+    : res.json({ err: "Credentials is wrong" });
 });
 
 router.patch("/editProfile", async (req, res) => {
@@ -82,7 +86,7 @@ router.patch("/editProfile", async (req, res) => {
   const updatedUser = await User.findOne({ email }).lean().exec();
   updatedUser
     ? res.status(200).json({ updatedUser })
-    : res.status(200).json({ err: "Credentials is wrong" });
+    : res.json({ err: "Credentials is wrong" });
 });
 
 router.delete("/deleteProfile", async (req, res) => {
@@ -106,25 +110,17 @@ router.delete("/deleteProfile", async (req, res) => {
   const updatedUser = await User.findOne({ email }).lean().exec();
   updatedUser
     ? res.status(200).json({ updatedUser })
-    : res.status(200).json({ err: "Credentials is wrong" });
+    : res.json({ err: "Credentials is wrong" });
 });
 
 router.patch("/editUser", async (req, res) => {
-  const { user, profile } = req.body;
-
-  const userBefore = await User.findOne({ email: user.email }).lean().exec();
+  const { user } = req.body;
 
   await User.updateOne(
     { email: user.email },
     {
       $set: {
-        name: req.body.name,
-        gender: req.body.gender,
-        birthdate: req.body.birthdate,
-        city: req.body.city,
-        profiles: userBefore?.profiles
-          ? [...userBefore.profiles, profile]
-          : profile,
+        ...user,
       },
     }
   )
@@ -134,7 +130,7 @@ router.patch("/editUser", async (req, res) => {
   const updatedUser = await User.findOne({ email: user.email }).lean().exec();
   updatedUser
     ? res.status(200).json({ updatedUser })
-    : res.status(200).json({ err: "Credentials is wrong" });
+    : res.json({ err: "Credentials is wrong" });
 });
 
 router.delete("/deleteUser", async (req, res) => {
@@ -146,7 +142,15 @@ router.delete("/deleteUser", async (req, res) => {
 
   allUsers
     ? res.status(200).json({ allUsers })
-    : res.status(200).json({ err: "Server disconected " });
+    : res.json({ err: "Server disconected " });
+});
+
+router.post("/user", async (req, res) => {
+  const { user } = req.body;
+  const postUser = await User.findOne({ email: user.email }).lean().exec();
+  postUser
+    ? res.status(200).json({ user })
+    : res.json({ err: "Server disconected " });
 });
 
 module.exports = router;

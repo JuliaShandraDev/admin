@@ -3,7 +3,7 @@ import styles from "../../styles/Cards/cardUsers.module.scss";
 
 const CardUsers = ({ userToDisplay }) => {
   return (
-    <div className={`row ${styles.wrapper_card}`}>
+    <div className={`row ${styles.wrapperCard}`}>
       <div className={`col centered ${styles.card}`}>
         <p>{userToDisplay.name}</p>
         <p>{userToDisplay.email}</p>

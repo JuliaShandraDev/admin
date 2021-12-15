@@ -1,4 +1,4 @@
-.wrapper_card{
+.wrapperCard{
     width: 400px;
     height: auto;
     
@@ -13,12 +13,12 @@
         border-radius: 16px;
         margin: 50px;
 
-        .card_button{
+        .cardButton{
             width: 100%;
             position: absolute;
             bottom: 0;
             
-            .button_right{
+            .buttonRight{
                 width: 50%;
                 height: 35px;
                 cursor: pointer;
@@ -26,10 +26,10 @@
                 border-bottom-right-radius: 16px;
                 background: none;
             }
-            .button_right:hover {
+            .buttonRight:hover {
                 background: #EB0055;
             }
-            .button_left{
+            .buttonLeft{
                 width: 50%;
                 height: 35px;
                 cursor: pointer;

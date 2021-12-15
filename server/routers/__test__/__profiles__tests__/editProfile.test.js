@@ -1,4 +1,5 @@
 const router = require("../../router");
+const user = require("../__mocks__/testUser");
 const { app } = require("../../../index");
 const request = require("supertest");
 

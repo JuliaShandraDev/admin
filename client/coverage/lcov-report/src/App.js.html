@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -114,16 +114,9 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,19 +139,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -189,12 +171,14 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 &nbsp;
-import SingIn from "./Components/SingIn";
-import Create from "./Components/Create";
-import Users from "./Components/Users";
-import Profiles from "./Components/Profiles";
-import Dashboard from "./Components/Dashboard";
-import Header from "./Components/Header";
+import { storage, storaageAdult, storageAdult } from "./thunks";
+&nbsp;
+import SignIn from "./Components/Pages/SignIn";
+import Registration from "./Components/Pages/Registration";
+import Users from "./Components/Pages/Users";
+import Profiles from "./Components/Pages/Profiles";
+import Dashboard from "./Components/Pages/Dashboard";
+import Header from "./Components/Shared/Header";
 &nbsp;
 function <span class="fstat-no" title="function not covered" >App(</span>) {
   const user = <span class="cstat-no" title="statement not covered" >useSelector(<span class="fstat-no" title="function not covered" >(s</span>tore) =&gt; <span class="cstat-no" title="statement not covered" >store.user)</span>;</span>
@@ -203,22 +187,11 @@ function <span class="fstat-no" title="function not covered" >App(</span>) {
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {}, [user]);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    user &amp;&amp;</span>
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ ...user, createdAt: new Date().getMonth() })
-      );
+<span class="cstat-no" title="statement not covered" >    dispatch(storageAdult(user));</span>
   }, [user]);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (localStorage.getItem("user")) {</span>
-      const localUser = <span class="cstat-no" title="statement not covered" >JSON.parse(localStorage.getItem("user"));</span>
-<span class="cstat-no" title="statement not covered" >      +localUser?.createdAt === +new Date(Date.now()).getMonth() &amp;&amp;</span>
-        dispatch({
-          type: "LOGIN/REGISTER",
-          payload: localUser,
-        });
-    }
+<span class="cstat-no" title="statement not covered" >    dispatch(storage(dispatch));</span>
   }, []);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
@@ -227,9 +200,9 @@ function <span class="fstat-no" title="function not covered" >App(</span>) {
         {user &amp;&amp; &lt;Header /&gt;}
 &nbsp;
         &lt;Routes&gt;
-          &lt;Route path="/" element={&lt;Create /&gt;}&gt;&lt;/Route&gt;
+          &lt;Route path="/" element={&lt;Registration /&gt;}&gt;&lt;/Route&gt;
 &nbsp;
-          &lt;Route path="/login" element={&lt;SingIn /&gt;}&gt;&lt;/Route&gt;
+          &lt;Route path="/login" element={&lt;SignIn /&gt;}&gt;&lt;/Route&gt;
 &nbsp;
           &lt;Route path="/profiles" element={&lt;Profiles /&gt;}&gt;&lt;/Route&gt;
 &nbsp;
@@ -250,7 +223,7 @@ export default App;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Dec 10 2021 17:57:50 GMT+0200 (за східноєвропейським стандартним часом)
+                at Wed Dec 15 2021 17:30:36 GMT+0200 (за східноєвропейським стандартним часом)
             </div>
         </div>
         <script src="../prettify.js"></script>

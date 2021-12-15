@@ -4,12 +4,14 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import SingIn from "./Components/SingIn";
-import Create from "./Components/Create";
-import Users from "./Components/Users";
-import Profiles from "./Components/Profiles";
-import Dashboard from "./Components/Dashboard";
-import Header from "./Components/Header";
+import { storage, storaageAdult, storageAdult } from "./thunks";
+
+import SignIn from "./Components/Pages/SignIn";
+import Registration from "./Components/Pages/Registration";
+import Users from "./Components/Pages/Users";
+import Profiles from "./Components/Pages/Profiles";
+import Dashboard from "./Components/Pages/Dashboard";
+import Header from "./Components/Shared/Header";
 
 function App() {
   const user = useSelector((store) => store.user);
@@ -18,22 +20,11 @@ function App() {
   useEffect(() => {}, [user]);
 
   useEffect(() => {
-    user &&
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ ...user, createdAt: new Date().getMonth() })
-      );
+    dispatch(storageAdult(user));
   }, [user]);
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      const localUser = JSON.parse(localStorage.getItem("user"));
-      +localUser?.createdAt === +new Date(Date.now()).getMonth() &&
-        dispatch({
-          type: "LOGIN/REGISTER",
-          payload: localUser,
-        });
-    }
+    dispatch(storage(dispatch));
   }, []);
 
   return (
@@ -42,9 +33,9 @@ function App() {
         {user && <Header />}
 
         <Routes>
-          <Route path="/" element={<Create />}></Route>
+          <Route path="/" element={<Registration />}></Route>
 
-          <Route path="/login" element={<SingIn />}></Route>
+          <Route path="/login" element={<SignIn />}></Route>
 
           <Route path="/profiles" element={<Profiles />}></Route>
 

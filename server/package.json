@@ -11,7 +11,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest --collectCoverage ",
+    "test": "npx jest --verbose --coverage --forceExit --watchAll --maxWorkers=1 --testTimeout=20000",
     "server": "nodemon index"
   },
   "keywords": [],

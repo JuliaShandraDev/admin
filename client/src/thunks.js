@@ -74,7 +74,7 @@ export const editProfile = (user, formData, profile) => {
 
 export const createProfile = (user, formData) => {
   return async (dispatch) => {
-    const create = await fetch("/editUser", {
+    const create = await fetch("/createProfile", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -83,5 +83,35 @@ export const createProfile = (user, formData) => {
     });
     const json = await create.json();
     dispatch({ type: "LOGIN/REGISTER", payload: json.updatedUser });
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    dispatch({ type: "LOGOUT" });
+    localStorage.setItem("user", null);
+  };
+};
+
+export const storageAdult = (user) => {
+  return () => {
+    user &&
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...user, createdAt: new Date().getMonth() })
+      );
+  };
+};
+
+export const storage = () => {
+  return (dispatch) => {
+    if (localStorage.getItem("user")) {
+      const localUser = JSON.parse(localStorage.getItem("user"));
+      +localUser?.createdAt === +new Date(Date.now()).getMonth() &&
+        dispatch({
+          type: "LOGIN/REGISTER",
+          payload: localUser,
+        });
+    }
   };
 };
